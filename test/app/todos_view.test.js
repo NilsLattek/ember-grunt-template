@@ -31,7 +31,7 @@ describe('TodosView', function() {
     });
 
     it('should render text from the view', function() {
-      assert( todosView.$('.text').html().indexOf('Text from the view') !== -1 );
+      assert.include(todosView.$('.text').html(), 'Text from the view');
 
       Ember.run(function() {
         todosView.set('someText', 'Text changed');
