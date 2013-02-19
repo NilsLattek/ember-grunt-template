@@ -5,6 +5,7 @@ Heavily inspired by [trek](https://github.com/trek/ember-todos-with-build-tools-
 Setup:
 
     $ npm install .
+    $ npm install -g grunt-cli
 
 Start a watch task and a live reload server at [localhost:8000](http://localhost:8000/build/index.html):
 
