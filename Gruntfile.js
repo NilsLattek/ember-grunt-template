@@ -12,7 +12,7 @@ module.exports = function(grunt) {
     },
 
     /* Concat css */
-    mincss: {
+    cssmin: {
       compress: {
         files: {
           'build/application.css': ['app/css/**/*.css']
@@ -99,7 +99,7 @@ module.exports = function(grunt) {
       },
       css: {
         files: ['app/css/**/*.css'],
-        tasks: ['mincss', 'livereload']
+        tasks: ['cssmin', 'livereload']
       }
     },
 
@@ -139,7 +139,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-regarde');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-livereload');
-  grunt.loadNpmTasks('grunt-contrib-mincss');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-mocha');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -157,9 +157,9 @@ module.exports = function(grunt) {
     grunt.file.write('test/testrunner.html', grunt.template.process(tmpl, renderingContext));
   });
 
-  grunt.registerTask('build', ['ember_templates', 'neuter:production', 'uglify', 'mincss', 'imagemin', 'copy', 'clean:imageBackups']);
+  grunt.registerTask('build', ['ember_templates', 'neuter:production', 'uglify', 'cssmin', 'imagemin', 'copy', 'clean:imageBackups']);
 
   grunt.registerTask('test', ['ember_templates', 'neuter:development', 'build_test_runner_file', 'mocha']);
 
-  grunt.registerTask('default', ['livereload-start', 'connect', 'ember_templates', 'neuter:development', 'mincss', 'imagemin', 'copy', 'regarde']);
+  grunt.registerTask('default', ['livereload-start', 'connect', 'ember_templates', 'neuter:development', 'cssmin', 'imagemin', 'copy', 'regarde']);
 };
