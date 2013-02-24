@@ -34,7 +34,7 @@ module.exports = function(grunt) {
 
     /* remove image backups */
     clean: {
-      imageBackups: ['build/images/**/*.bak']
+      build: ['build']
     },
 
     /* copy other files like icons */
@@ -157,7 +157,7 @@ module.exports = function(grunt) {
     grunt.file.write('test/testrunner.html', grunt.template.process(tmpl, renderingContext));
   });
 
-  grunt.registerTask('build', ['ember_templates', 'neuter:production', 'uglify', 'cssmin', 'imagemin', 'copy', 'clean:imageBackups']);
+  grunt.registerTask('build', ['clean:build', 'ember_templates', 'neuter:production', 'uglify', 'cssmin', 'imagemin', 'copy']);
 
   grunt.registerTask('test', ['ember_templates', 'neuter:development', 'build_test_runner_file', 'mocha']);
 
