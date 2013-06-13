@@ -78,7 +78,7 @@ module.exports = function(grunt) {
     },
 
     /* precompile ember templates */
-    ember_templates: {
+    emberTemplates: {
       options: {
         templateName: function(sourceFile) {
           return sourceFile.replace(/app\/templates\//, '');
@@ -95,7 +95,7 @@ module.exports = function(grunt) {
       },
       handlebars_templates: {
         files: ['app/templates/**/*.hbs'],
-        tasks: ['ember_templates', 'neuter:development', 'livereload']
+        tasks: ['emberTemplates', 'neuter:development', 'livereload']
       },
       css: {
         files: ['app/css/**/*.css'],
@@ -157,9 +157,9 @@ module.exports = function(grunt) {
     grunt.file.write('test/testrunner.html', grunt.template.process(tmpl, renderingContext));
   });
 
-  grunt.registerTask('build', ['clean:build', 'ember_templates', 'neuter:production', 'uglify', 'cssmin', 'imagemin', 'copy']);
+  grunt.registerTask('build', ['clean:build', 'emberTemplates', 'neuter:production', 'uglify', 'cssmin', 'imagemin', 'copy']);
 
-  grunt.registerTask('test', ['ember_templates', 'neuter:development', 'build_test_runner_file', 'mocha']);
+  grunt.registerTask('test', ['emberTemplates', 'neuter:development', 'build_test_runner_file', 'mocha']);
 
-  grunt.registerTask('default', ['livereload-start', 'connect', 'ember_templates', 'neuter:development', 'cssmin', 'imagemin', 'copy', 'regarde']);
+  grunt.registerTask('default', ['livereload-start', 'connect', 'emberTemplates', 'neuter:development', 'cssmin', 'imagemin', 'copy', 'regarde']);
 };
