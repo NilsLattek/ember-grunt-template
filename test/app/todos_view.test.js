@@ -6,8 +6,8 @@ describe('TodosView', function() {
     Ember.run(function() {
       todosView = App.TodosView.create({ templateName: 'todos' });
       var todos = [
-        App.Todo.createRecord({ id: 1, name: 'Do something' }),
-        App.Todo.createRecord({ id: 2, name: 'Do something else' })
+        App.Todo.create({ id: 1, name: 'Do something' }),
+        App.Todo.create({ id: 2, name: 'Do something else' })
       ];
 
       var controller = App.TodosController.create();

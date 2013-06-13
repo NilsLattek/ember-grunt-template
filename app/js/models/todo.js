@@ -1,4 +1,3 @@
+App.Todo = Ember.Object.extend({
 
-App.Todo = DS.Model.extend({
-  name: DS.attr('string')
 });

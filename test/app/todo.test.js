@@ -1,6 +1,6 @@
 describe('Todo', function() {
   it('should create a todo', function() {
-    var todo = App.Todo.createRecord();
+    var todo = App.Todo.create();
     assert.equal(todo.get('name'), null);
 
     Ember.run(function(){
