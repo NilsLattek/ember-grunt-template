@@ -23,7 +23,7 @@ THE SOFTWARE.
 */
 
 // lib/handlebars/browser-prefix.js
-this.Handlebars = {};
+window.Handlebars = {};
 
 (function(Handlebars, undefined) {
 ;
