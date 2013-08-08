@@ -69,7 +69,15 @@ module.exports = function(grunt) {
       },
       production: {
         options: {
-          includeSourceURL: false
+          includeSourceURL: false,
+          filepathTransform: function(filepath) {
+            // use ember production build which does not include debug logs and assertions
+            if (filepath === 'app/js/vendor/ember') {
+              return 'app/js/vendor/ember.prod';
+            }
+
+            return filepath;
+          }
         },
         files: {
           'build/application.js': 'app/js/main.js'
