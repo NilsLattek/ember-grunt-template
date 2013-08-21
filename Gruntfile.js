@@ -108,6 +108,10 @@ module.exports = function(grunt) {
       css: {
         files: ['app/css/**/*.css'],
         tasks: ['cssmin', 'livereload']
+      },
+      images: {
+        files: ['app/images/**'],
+        tasks: ['imagemin', 'livereload']
       }
     },
 
