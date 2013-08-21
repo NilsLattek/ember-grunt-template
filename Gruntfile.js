@@ -5,6 +5,8 @@ var folderMount = function folderMount(connect, point) {
   return connect.static(path.resolve(point));
 };
 
+var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
+
 module.exports = function(grunt) {
   grunt.initConfig({
     uglify: {
@@ -117,14 +119,28 @@ module.exports = function(grunt) {
 
     /* start livereload server */
     connect: {
+      options: {
+        port: 8000,
+        // change this to '0.0.0.0' to access the server from outside
+        hostname: 'localhost'
+      },
       livereload: {
         options: {
-          port: 8000,
           middleware: function(connect, options) {
-            return [lrSnippet, folderMount(connect, '.')];
+            return [proxySnippet, lrSnippet, folderMount(connect, '.')];
           }
         }
-      }
+      },
+      // proxy every request starting with /api to localhost:3000
+      proxies: [
+        {
+          context: '/api',
+          host: 'localhost',
+          port: 3000,
+          https: false,
+          changeOrigin: false
+        }
+      ]
     },
 
     /* build test runner so that we do not have to include each test script manually */
@@ -149,6 +165,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ember-templates');
   grunt.loadNpmTasks('grunt-regarde');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-connect-proxy');
   grunt.loadNpmTasks('grunt-contrib-livereload');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-mocha');
@@ -172,5 +189,5 @@ module.exports = function(grunt) {
 
   grunt.registerTask('test', ['emberTemplates', 'neuter:development', 'build_test_runner_file', 'mocha']);
 
-  grunt.registerTask('default', ['livereload-start', 'connect', 'emberTemplates', 'neuter:development', 'cssmin', 'imagemin', 'copy', 'regarde']);
+  grunt.registerTask('default', ['configureProxies', 'livereload-start', 'connect:livereload', 'emberTemplates', 'neuter:development', 'cssmin', 'imagemin', 'copy', 'regarde']);
 };
