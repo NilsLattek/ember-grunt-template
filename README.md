@@ -2,6 +2,27 @@
 
 Heavily inspired by [trek](https://github.com/trek/ember-todos-with-build-tools-tests-and-other-modern-conveniences)
 
+## Features
+
+#### Easy to customize
+It's just plain grunt!
+
+#### No module system
+No AMD, no CommonJS. Why? With frameworks like ember and angular you don't really need one. These frameworks already wrap everything in a function/class/module under a global namespace. Example: `Ember.ArrayController.extend({ /* ... */ });`<br />
+Instead we are using grunt-neuter to concatenate the files in the correct order.
+
+#### It's fast
+During development the concatenation and template compilation is instant. The production build takes a little while, because of the uglifing stuff.
+
+#### Using ember production build
+During development we are using the normal ember development build which provides us with great error messages. You do not want these in production so we are using the ember production version during the build process.
+
+#### Tackling the Access-Control-Allow-Origin error during development
+When starting the grunt server it is running on port 8000 and your backend server is running on a different port. So when you try to access your API you will get the `Access-Control-Allow-Origin` error in your browser. To avoid this error we are using a grunt proxy, which proxies every request back to your server. Take a look at the `connect -> proxies` section in the `Gruntfile.js`.
+
+#### Live reload
+Change a file, save it and your browser automatically reloads.
+
 ## Setup
 
 Install dependencies:
