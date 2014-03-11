@@ -92,7 +92,8 @@ module.exports = function(grunt) {
       options: {
         templateName: function(sourceFile) {
           return sourceFile.replace(/app\/templates\//, '');
-        }
+        },
+        handlebarsPath: 'app/js/vendor/handlebars.js'
       },
       'tmp/templates.js': ["app/templates/**/*.hbs"]
     },
