@@ -1,3 +1,9 @@
+#DEPRECATED
+You should now use the official [ember-cli](http://iamstef.net/ember-cli/) project!!!
+
+
+
+
 # Ember template for new apps using grunt
 
 Heavily inspired by [trek](https://github.com/trek/ember-todos-with-build-tools-tests-and-other-modern-conveniences)
